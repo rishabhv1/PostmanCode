@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "12759a3d-646a-4bfd-b9d2-d6f4eb487176",
+		"name": "JIRA API TESTING",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add user functionality",
+			"item": [
+				{
+					"name": "create user in jira",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d24bc2cc-4953-45bd-9ada-82ad258e6306",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var response=JSON.parse(responseBody);",
+									"var username=response.key;",
+									"postman.setGlobalVariable(\"username\",username);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mummykijeyho",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rishabh",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"rahul1123dfdg5dfd65545dd4\",\r\n    \"password\": \"uff1115dfg65fdf45dd5\",\r\n    \"emailAddress\": \"rahuldfggdfddf22545dd51@abc.cpom\",\r\n    \"displayName\": \"rahulgdf22dfd5dd4551\",\r\n    \"applicationKeys\": [\r\n        \"jira-core\"\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/rest/api/2/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"user"
+							]
+						},
+						"description": "1-Add user\n2-Verify user added successfully"
+					},
+					"response": []
+				},
+				{
+					"name": "get user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a09894b1-8f70-4d20-944c-25e59f897e68",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mummykijeyho",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rishabh",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/rest/api/2/user?name={{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{username}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user ",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/rest/api/2/user?name={{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{username}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify user deleted",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/rest/api/2/user?name={{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{username}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
